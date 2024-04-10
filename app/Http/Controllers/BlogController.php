@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,16 +21,17 @@ class BlogController extends Controller
             return $validator->errors();
         }
 
-        return $validator->validated();
+        //Create post
+        $newPost = new Post();
+        $newPost->title = $request->title;
+        $newPost->body = $request->body;
+        $newPost->save();
+
+        return $newPost;
     }
 
-    public function storeForm(Request $request) : RedirectResponse
+    public function storeForm(StorePostRequest $request) : RedirectResponse
     {
-        $request->validate([
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-        ]);
-
         $validated = $request->validated();
 
         dd($validated);
