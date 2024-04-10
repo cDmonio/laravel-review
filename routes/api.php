@@ -19,4 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('blog/post', [BlogController::class, 'store']);
+Route::post('blog/post', [BlogController::class, 'storeApi']);

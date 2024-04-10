@@ -5,10 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
-    public function store(Request $request) : RedirectResponse
+    public function storeApi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
+        return $validator->validated();
+    }
+
+    public function storeForm(Request $request) : RedirectResponse
     {
         $request->validate([
             'title' => 'required|unique:posts|max:255',
