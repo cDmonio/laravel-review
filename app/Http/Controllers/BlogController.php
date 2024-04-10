@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\StorePostRequestApi;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -10,16 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
-    public function storeApi(Request $request)
+    public function storeApi(StorePostRequestApi $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
+        //$validated = $request->validated();
 
         //Create post
         $newPost = new Post();
