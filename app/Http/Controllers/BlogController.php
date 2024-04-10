@@ -34,12 +34,17 @@ class BlogController extends Controller
     {
         $validated = $request->validated();
 
-        dd($validated);
+        //Create post
+        $newPost = new Post();
+        $newPost->title = $request->title;
+        $newPost->body = $request->body;
+        $newPost->save();
 
-        // Retrieve a portion of the validated input data...
-        $validated = $request->safe()->only(['name', 'email']);
-        $validated = $request->safe()->except(['name', 'email']);
+        return redirect(route('blog.post', ['post' => $newPost->id]));
+    }
 
-        return redirect('/posts');
+    public function show(Post $post)
+    {
+        return view('post', ['post' => $post]);
     }
 }

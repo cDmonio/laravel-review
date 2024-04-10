@@ -16,34 +16,7 @@
         </style>
     </head>
     <body class="antialiased">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form class="p-6 max-w-7xl mx-auto" action="{{ route('blog.store') }}" method="POST">
-            @csrf
-            <div class="p-6 max-w-7xl mx-auto">
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div>
-                        <label for="title" class="block text-sm font-semibold text-gray-600">Title</label>
-                        <input type="text" name="title" id="title" class="block w-full mt-1 rounded-lg shadow-gray-500/20 focus:outline focus:outline-2 focus:outline-red-500 focus:rounded-sm focus:shadow-2xl" required>
-                    </div>
-                    <div>
-                        <label for="content" class="block text-sm font-semibold text-gray-600">Content</label>
-                        <textarea name="body" id="body" class="block w-full mt-1 rounded-lg shadow-gray-500/20 focus:outline focus:outline-2 focus:outline-red-500 focus:rounded-sm focus:shadow-2xl" required></textarea>
-                    </div>
-                </div>
-                <div class="mt-6">
-                    <button type="submit" class="px-6 py-3 text-sm font-semibold text-white bg-red-500 rounded-lg shadow-2xl hover:scale-[1.01] transition-all">Create Blog</button>
-                </div>
-            </div>
-        </form>
-
+        <p>El titulo del post es: {{ $post->title }}</p>
+        <p>El contenido del post es: {{ $post->body }}</p>
     </body>
 </html>

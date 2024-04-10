@@ -18,4 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('blog/post', [BlogController::class, 'store']);
+
+Route::prefix('blog')->group(function () {
+    Route::post('post', [BlogController::class, 'storeForm'])->name('blog.store');
+    Route::get('post/{post}', [BlogController::class, 'show'])->name('blog.post');
+});
+
